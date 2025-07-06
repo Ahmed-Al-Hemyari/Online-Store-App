@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineStore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header" id="page-header"></header>
+    <main class="app-container">
+      <main id="categories">
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem('categoryName', 'smartPhonesDB'); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/smart-phones.webp" />
+          <h4 class="category-name">Smart Phones</h4>
+        </div>
+
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `LaptopsDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/laptops.webp" />
+          <h4 class="category-name">Laptops</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `DevicesDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/devices.webp" />
+          <h4 class="category-name">Devices</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `computerAccessoriesDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/computer-accessories.webp" />
+          <h4 class="category-name">Computer Accessories</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `ElectronicsDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/Electronics.webp" />
+          <h4 class="category-name">Electronics</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `FitnessDB`); window.location.href = './products.html';"
+        >
+          <img class="category-picture" src="./images/Categories/sport.webp" />
+          <h4 class="category-name">Fitness</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `HomeAndKitchenDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/home and kitchen.webp" />
+          <h4 class="category-name">Home & Kitchen</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `FurnitureDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/furniture.webp" />
+          <h4 class="category-name">Furniture</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `OfficeSuppliesDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/office-supplies.webp" />
+          <h4 class="category-name">Office Supplies</h4>
+        </div>
+
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `BooksDB`); window.location.href = './products.html';"
+        >
+          <img class="category-picture" src="./images/Categories/books.webp" />
+          <h4 class="category-name">Books</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `ToysAndGamesDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/toys&games.webp" />
+          <h4 class="category-name">Toys & Games</h4>
+        </div>
+        <div
+          class="category-card"
+          role="button"
+          onclick="localStorage.setItem(`categoryName`, `AutomotivesDB`); window.location.href = './products.html';"
+        >
+          <img src="./images/Categories/automotives.webp" />
+          <h4 class="category-name">Automotives</h4>
+        </div>
+      </main>
+      <!-- <main id="products"></main> -->
+    </main>
+    <footer class="page-footer" id="page-footer"></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

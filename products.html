@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineStore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header" id="page-header"></header>
+    <main class="app-container" id="products-container"></main>
+    <footer class="page-footer" id="page-footer"></footer>
+    <script src="script.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const productsPage = document.getElementById("products-container");
+
+        const categoryName = localStorage.getItem("categoryName");
+        const storedProductsArray =
+          JSON.parse(localStorage.getItem(categoryName)) || [];
+
+        for (let product of storedProductsArray) {
+          productsPage.innerHTML += addProduct(
+            product.title,
+            filterPrice(product.price),
+            product.image
+          );
+        }
+
+        productsPage.addEventListener("click", function (e) {
+          const addToCartButton = e.target.closest(".add-to-cart-btn");
+          if (addToCartButton) {
+            let productCard = e.target.closest(".product-card");
+            let title = productCard.querySelector(".product-name").textContent;
+            let price = productCard.querySelector("#product-price").textContent;
+            let image = productCard.querySelector(".product-card-image").src;
+
+            let cartList = JSON.parse(localStorage.getItem("cartListDB")) || [];
+
+            const alreadyExists = cartList.some(
+              (product) => product.title === title
+            );
+
+            if (alreadyExists) {
+              alert("This products is already in the cart!");
+              return;
+            }
+
+            cartList.push({
+              title: title,
+              price: price,
+              image: image,
+            });
+            localStorage.setItem("cartListDB", JSON.stringify(cartList));
+            alert("Product added to cart successfully!");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

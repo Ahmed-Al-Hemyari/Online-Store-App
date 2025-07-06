@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineStore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header" id="page-header"></header>
+    <main class="app-container" id="cart-page">
+      <div id="payment-box">
+        <h3>Payment Method</h3>
+        <div id="card-box">
+          <h3>Credit / Debit Card</h3>
+          <div>
+            <img src="./images/icons & logos/Visa-logo.png" alt="" />
+            <img src="./images/icons & logos/master-card.png" alt="" />
+          </div>
+
+          <p>
+            You maybe directed to your bank 3D secure process to authenticate
+            your information
+          </p>
+          <form id="payment-form">
+            <input
+              type="number"
+              name=""
+              id="card-number"
+              placeholder="Card number"
+              inputmode="numeric"
+              maxlength="16"
+              required
+            />
+            <input
+              type="text"
+              name=""
+              id="expiry-date"
+              placeholder="Expiry date"
+              required
+            />
+            <input
+              type="password"
+              name=""
+              id="cvv"
+              placeholder="CVC/CVV"
+              required
+            />
+            <input
+              type="text"
+              name=""
+              id="name"
+              placeholder="Name on card"
+              required
+            />
+          </form>
+        </div>
+        <button type="submit" form="payment-form" id="continue">
+          Continue
+        </button>
+      </div>
+    </main>
+
+    <footer class="page-footer" id="page-footer"></footer>
+
+    <script src="script.js" defer></script>
+    <script>
+      document
+        .getElementById("payment-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          // Optional: extra manual validation (e.g., card number length check)
+          const cardNumber = document.getElementById("card-number").value;
+          if (cardNumber.length !== 16) {
+            alert("Card number must be exactly 16 digits.");
+            return;
+          }
+          const cvv = document.getElementById("cvv").value;
+          if (cvv.length !== 3) {
+            alert("CVV must be exactly 3");
+            return;
+          }
+          // All validations passed
+
+          localStorage.setItem("cartListDB", JSON.stringify([]));
+          window.location.href = "./index.html";
+          alert(
+            "Thanks for using OnlineStore, Your order will be delivered as soon as possible"
+          );
+        });
+    </script>
+  </body>
+</html>

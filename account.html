@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineStore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header" id="page-header"></header>
+    <main
+      class="app-container"
+      style="
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 85vh;
+      "
+    >
+      <form id="sign-in">
+        <label for="">Name</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Type your name here"
+          required
+        />
+        <label for="">Password</label>
+        <input id="password" type="password" placeholder="Password" required />
+        <button type="submit">Sing In</button>
+      </form>
+      <div id="welcoming"></div>
+    </main>
+    <footer class="page-footer"></footer>
+    <script src="script.js"></script>
+
+    <script>
+      window.addEventListener("load", function (e) {
+        let signIn = localStorage.getItem("sign-in-name");
+        if (signIn === "") {
+          signInForm.style.display = "flex";
+          welcoming.innerHTML = "";
+          welcoming.style.display = "none";
+        } else {
+          signInForm.style.display = "none";
+          welcoming.style.display = "flex";
+          welcoming.innerHTML = `        <h3>Welcome, ${localStorage.getItem(
+            "sign-in-name"
+          )}</h3>
+        <p>You can now shop form OnlineStore</p>
+        <button onclick="localStorage.setItem('sign-in-name', ''); location.reload();">Log Out</button>`;
+        }
+      });
+      let signInForm = document.getElementById("sign-in");
+      let singInName = document.getElementById("name");
+      let signInPassword = document.getElementById("password");
+      let welcoming = document.getElementById("welcoming");
+
+      signInForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        localStorage.setItem("sign-in-name", singInName.value);
+        signInForm.style.display = "none";
+        welcoming.style.display = "flex";
+        welcoming.innerHTML = `        <h3>Welcome, ${localStorage.getItem(
+          "sign-in-name"
+        )}</h3>
+        <p>You can now shop form OnlineStore</p>
+        <button>Log Out</button>`;
+        signInForm.reset();
+      });
+    </script>
+  </body>
+</html>

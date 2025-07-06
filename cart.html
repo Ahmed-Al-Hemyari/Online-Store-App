@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnlineStore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header" id="page-header"></header>
+    <main class="app-container" id="cart-page">
+      <!-- <section class="smart-phones" id="smart-phones"></section> -->
+    </main>
+
+    <footer class="page-footer" id="page-footer">
+      <button id="go-to-payment" onclick="goToPayment()">
+        Go To Payment →
+      </button>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+      function goToPayment() {
+        if (storedCartList.length === 0) {
+          alert("You must have at least one item in cart!");
+        } else {
+          window.location.href = "./payment.html";
+        }
+      }
+
+      let storedCartList = JSON.parse(localStorage.getItem("cartListDB")) || [];
+      const cartPage = document.getElementById("cart-page");
+      window.addEventListener("load", function (e) {
+        for (let product of storedCartList) {
+          cartPage.innerHTML += addCartProduct(
+            product.title,
+            product.price,
+            product.image
+          );
+        }
+      });
+      cartPage.addEventListener("click", function (e) {
+        const deleteFromCart = e.target.closest(".cart-product-delete");
+        if (deleteFromCart) {
+          let cartProduct = e.target.closest(".cart-product");
+          let title = cartProduct.querySelector(".product-title").textContent;
+
+          let storedCartList =
+            JSON.parse(localStorage.getItem("cartListDB")) || [];
+          storedCartList = storedCartList.filter(
+            (product) => product.title !== title
+          );
+          localStorage.setItem("cartListDB", JSON.stringify(storedCartList));
+          location.reload();
+        }
+        const quantityPlus = e.target.closest(".quantity-plus");
+        const quantityMinus = e.target.closest(".quantity-minus");
+        if (quantityPlus) {
+          const quantityElement = quantityPlus
+            .closest(".quantity-selector")
+            .querySelector(".product-quantity");
+          let qunatity = Number(quantityElement.textContent);
+          qunatity += 1;
+          quantityElement.textContent = qunatity;
+          const priceElement = quantityPlus
+            .closest(".cart-product-info")
+            .querySelector(".cart-product-price");
+          const unitPrice = Number(priceElement.getAttribute("data-price"));
+          // const currentPrice = Number(priceElement.textContent);
+          const totalPrice = qunatity * unitPrice;
+          priceElement.innerHTML = `
+          ${filterPrice(
+            totalPrice
+          )} <span class="cart-currency">${filterCurrency()}</span>
+          `;
+        } else if (quantityMinus) {
+          const quantityElement = quantityMinus
+            .closest(".quantity-selector")
+            .querySelector(".product-quantity");
+          let quantity = Number(quantityElement.textContent);
+          if (quantity > 1) {
+            quantity -= 1;
+            quantityElement.textContent = quantity;
+
+            const priceElement = quantityMinus
+              .closest(".cart-product-info")
+              .querySelector(".cart-product-price");
+            const unitPrice = Number(priceElement.getAttribute("data-price"));
+            const totalPrice = quantity * unitPrice;
+
+            priceElement.innerHTML = `
+            ${filterPrice(
+              totalPrice
+            )} <span class="cart-currency">${filterCurrency()}</span>
+          `;
+          }
+
+          const priceElement = quantityMinus
+            .closest(".cart-product-info")
+            .querySelector(".cart-product-price");
+          const unitPrice = Number(priceElement.getAttribute("data-price"));
+          // const currentPrice = Number(priceElement.textContent);
+          const totalPrice = qunatity * unitPrice;
+          priceElement.innerHTML = `
+          ${filterPrice(
+            totalPrice
+          )} <span class="cart-currency">${filterCurrency()}</span>
+          `;
+        }
+        const goToPayment = e.target.closest("#go-to-payment");
+        if (goToPayment) {
+          console.log("clicked");
+          // if (storedCartList == []) {
+          //   alert("You must have at least one item in cart!");
+          // } else {
+          //   window.location.href = "./payment.html";
+          // }
+        }
+      });
+    </script>
+  </body>
+</html>
