@@ -1,0 +1,35 @@
+<img
+  class="page-logo"
+  src="./images//icons & logos/OnlineStore Logo.svg"
+  onclick="goToHome()"
+/>
+<!-- <div class="search-row">
+  <input type="text" class="search-input" placeholder="Search" />
+  <button class="search-btn">
+    <img src="./images/icons & logos/search.svg" class="search-icon" />
+  </button>
+</div> -->
+<div class="settings-item">
+  <select name="currency" id="currency-select">
+    <option value="usd" selected>USD</option>
+    <option value="sar">SAR</option>
+    <option value="yer">YER</option>
+  </select>
+</div>
+<script>
+  const select = document.getElementById("currency-select");
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedCurrency = localStorage.getItem("currency");
+    if (savedCurrency) {
+      select.value = savedCurrency;
+    }
+  });
+  select.addEventListener("change", () => {
+    localStorage.setItem("currency", select.value);
+    location.reload();
+  });
+</script>
+<!-- <button class="mode-btn">
+        <img src="./images/dark-mode.svg" class="mode-icon" />
+      </button> -->
